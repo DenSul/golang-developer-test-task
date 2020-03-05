@@ -2,6 +2,7 @@ package main
 
 import (
 	configLoader "app/config"
+	"app/providers"
 	"app/redis"
 	"app/webserver"
 	"log"
@@ -15,6 +16,7 @@ func main() {
 
 	log.Println("Start web server")
 	log.Println(config.WebServer.Port)
+	providers.SelectStrategyDownloadFile("dsa")
 	redis.Connect(config.Redis)
 	webserver.Start(config.WebServer)
 }
