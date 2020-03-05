@@ -1,14 +1,16 @@
 package webserver
 
-import "net/http"
+import (
+	"app/webserver/web"
+	"net/http"
+)
 
-func handleRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("/", home)
+func setupRoutes(mux *http.ServeMux) {
+	// Inject render html
+	web.Rnd = rnd
+
+	mux.HandleFunc("/", web.Home)
 	mux.HandleFunc("/about", about)
-}
-
-func home(w http.ResponseWriter, r *http.Request) {
-	rnd.HTML(w, http.StatusOK, "home", nil)
 }
 
 func about(w http.ResponseWriter, r *http.Request) {

@@ -1,8 +1,8 @@
 redis:
-  hostname: 'redis'
-  port: 3366
-  username: 'user'
-  password: 'pass'
+  hostname: '127.0.0.1'
+  port: 6379
+  password: ''
+  database: 0
 
 webserver:
   port: ':9001'

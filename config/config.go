@@ -13,9 +13,9 @@ type Configurations struct {
 
 type RedisConfiguration struct {
 	Hostname string
-	Port     int8
-	Username string
+	Port     int
 	Password string
+	Database int
 }
 
 type WebServer struct {

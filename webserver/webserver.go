@@ -18,7 +18,7 @@ func Start(config config.WebServer) {
 	fs := http.FileServer(http.Dir(config.StaticPath))
 	mux := http.NewServeMux()
 
-	handleRoutes(mux)
+	setupRoutes(mux)
 	mux.Handle(config.StaticPrefix, http.StripPrefix(config.StaticPrefix, fs))
 
 	log.Println("Listening on port ", config.Port)
