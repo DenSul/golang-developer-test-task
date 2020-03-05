@@ -1,0 +1,12 @@
+redis:
+  hostname: 'redis'
+  port: 3366
+  username: 'user'
+  password: 'pass'
+
+webserver:
+  port: ':9001'
+  tpl: './resources/tpl/'
+  tpl_pattern: '*.html'
+  static_path: './resources/static/'
+  static_prefix: '/static/'
