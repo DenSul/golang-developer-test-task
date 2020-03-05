@@ -7,7 +7,8 @@ import (
 )
 
 type Configurations struct {
-	Redis RedisConfiguration
+	Redis     RedisConfiguration
+	WebServer WebServer
 }
 
 type RedisConfiguration struct {
@@ -15,6 +16,14 @@ type RedisConfiguration struct {
 	Port     int8
 	Username string
 	Password string
+}
+
+type WebServer struct {
+	Port         string
+	Tpl          string
+	TplPattern   string `mapstructure:"tpl_pattern"`
+	StaticPath   string `mapstructure:"static_path"`
+	StaticPrefix string `mapstructure:"static_prefix"`
 }
 
 func Load() Configurations {
