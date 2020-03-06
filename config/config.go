@@ -1,7 +1,7 @@
 package config
 
 import (
-	"flag"
+	"app/cmd"
 	"fmt"
 	"github.com/spf13/viper"
 )
@@ -26,12 +26,10 @@ type WebServer struct {
 	StaticPrefix string `mapstructure:"static_prefix"`
 }
 
-func Load() Configurations {
-	envPrefix := flag.String("env", "dev", "env for app")
-	flag.Parse()
+func Load(args *cmd.Args) Configurations {
 
 	// Set the file name of the configurations file
-	viper.SetConfigName("config." + *envPrefix)
+	viper.SetConfigName("config." + args.Env)
 
 	// Set the path to look for the configurations file
 	viper.AddConfigPath("./config")

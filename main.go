@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/cmd"
 	configLoader "app/config"
 	"app/providers"
 	"app/server"
@@ -11,14 +12,20 @@ import (
 
 func main() {
 
-	var config = configLoader.Load()
+	var args = new(cmd.Args)
+	args.Parse()
+	fmt.Println(args)
+	var config = configLoader.Load(args)
 
 	log.Println("Start web server")
 	log.Println(config.WebServer.Port)
 
 	redis.Connect(config.Redis)
 
-	test := providers.StrategyFactoryProvider("resources/data/data.json")
-	fmt.Println(test.Load())
+	if args.Source != "" {
+		providers.StrategyFactoryProvider(args.Source)
+		//fmt.Println(test.Load())
+	}
+
 	server.Start(config.WebServer)
 }
