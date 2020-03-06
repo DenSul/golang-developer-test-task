@@ -1,7 +1,7 @@
-package webserver
+package server
 
 import (
-	"app/webserver/web"
+	"app/server/web"
 	"net/http"
 )
 
