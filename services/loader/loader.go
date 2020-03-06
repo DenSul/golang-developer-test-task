@@ -1,9 +1,8 @@
 package loader
 
 import (
-	"app/providers"
+	"app/provider"
 	"app/storage"
-	"encoding/json"
 	"fmt"
 )
 
@@ -13,21 +12,37 @@ const Delimiter = ":"
 
 type Loader struct {
 	Storage  storage.Storage
-	Provider providers.Provider
+	Provider provider.Provider
 }
 
 func (l *Loader) Run() {
 
-	var data = l.Provider.Load()
-	for _, d := range data {
-		key := fmt.Sprintf("id%s%d", Delimiter, d.ID)
-		result, err := json.Marshal(d)
-		if err != nil {
-			panic(fmt.Sprintf("unable to marshal data with id %v: %v", d.ID, err))
-		}
+	fmt.Println(l.Storage.Connect())
+	//var data = l.Provider.Load()
 
-		fmt.Println(key, result)
-	}
+	//var mapIndex = make(map[string]map[string]interface{})
+	//for k, d := range data {
+	//	key := fmt.Sprintf("id%s%d", Delimiter, d.ID)
+	//	result, err := json.Marshal(d)
+	//	if err != nil {
+	//		panic(fmt.Sprintf("unable to marshal data with id %v: %v", d.ID, err))
+	//	}
+	//
+	//
+	//	if contains(AllowedIndex, k) {
+	//		fmt.Println()
+	//	}
+
+	//}
 
 	//fmt.Println(l.Provider.Load())
+}
+
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
 }

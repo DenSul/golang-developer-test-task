@@ -3,7 +3,7 @@ package main
 import (
 	"app/cmd"
 	configLoader "app/config"
-	"app/providers"
+	"app/provider"
 	"app/server"
 	dataLoader "app/services/loader"
 	"app/storage"
@@ -19,7 +19,7 @@ func main() {
 	var storage = storage.GetStorage(config.Storage)
 
 	if args.Source != "" {
-		var provider = providers.StrategyFactoryProvider(args.Source)
+		var provider = provider.StrategyFactoryProvider(args.Source)
 		var dataLoader = dataLoader.Loader{
 			Storage:  storage,
 			Provider: provider,

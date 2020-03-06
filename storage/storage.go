@@ -7,13 +7,10 @@ import (
 )
 
 type Storage interface {
-	//Connect()
-	//GetDB()
 	Insert(data []models.ParkingTaxi)
-	//CreateIndex(indexName string, data []string)
-	//FindBy(keyName string, query string)
 }
 
 func GetStorage(storage config.Storage) Storage {
-	return &redis.Redis{Config: storage.Redis}
+	// Считай, что это тоже шаблонный метод. :)
+	return redis.Connect(storage.Redis)
 }

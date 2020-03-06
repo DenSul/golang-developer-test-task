@@ -1,9 +1,9 @@
-package providers
+package provider
 
 import (
 	"app/models"
-	"app/providers/fileProvider"
-	"app/providers/httpProvider"
+	"app/provider/fileProvider"
+	"app/provider/httpProvider"
 	"log"
 	"os"
 )
