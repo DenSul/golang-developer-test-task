@@ -7,8 +7,12 @@ import (
 )
 
 type Configurations struct {
-	Redis     RedisConfiguration
+	Storage   Storage
 	WebServer WebServer
+}
+
+type Storage struct {
+	Redis RedisConfiguration
 }
 
 type RedisConfiguration struct {

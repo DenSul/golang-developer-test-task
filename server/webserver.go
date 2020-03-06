@@ -25,6 +25,6 @@ func Start(config config.WebServer) {
 	err := http.ListenAndServe(config.Port, mux)
 
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }

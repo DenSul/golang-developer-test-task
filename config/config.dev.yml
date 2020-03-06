@@ -1,8 +1,9 @@
-redis:
-  hostname: '127.0.0.1'
-  port: 6379
-  password: ''
-  database: 15
+storage:
+  redis:
+    hostname: '127.0.0.1'
+    port: 6379
+    password: ''
+    database: 15
 
 webserver:
   port: ':9001'
