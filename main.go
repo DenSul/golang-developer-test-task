@@ -20,6 +20,7 @@ func main() {
 
 	if args.Source != "" {
 		var provider = provider.StrategyFactoryProvider(args.Source)
+
 		var dataLoader = dataLoader.Loader{
 			Storage:  storage,
 			Provider: provider,

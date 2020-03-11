@@ -8,9 +8,12 @@ import (
 
 type Storage interface {
 	Insert(data []models.ParkingTaxi)
+	FlushAll()
+	GetPatternName() string
+	GetAllowedIndex() []string
 }
 
 func GetStorage(storage config.Storage) Storage {
-	// Считай, что это тоже шаблонный метод. :)
+	// sry, idk how to do it better
 	return redis.Connect(storage.Redis)
 }
