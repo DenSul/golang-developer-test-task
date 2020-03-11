@@ -1,6 +1,8 @@
 package models
 
-type ParkingTaxi []struct {
+var AllowedIndex = []string{"GlobalID", "ID", "Mode"}
+
+type ParkingTaxi struct {
 	GlobalID              int    `json:"global_id"`
 	SystemObjectID        string `json:"system_object_id"`
 	ID                    int    `json:"ID"`

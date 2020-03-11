@@ -1,4 +1,4 @@
-package webserver
+package server
 
 import (
 	"app/config"
@@ -18,13 +18,13 @@ func Start(config config.WebServer) {
 	fs := http.FileServer(http.Dir(config.StaticPath))
 	mux := http.NewServeMux()
 
-	handleRoutes(mux)
+	setupRoutes(mux)
 	mux.Handle(config.StaticPrefix, http.StripPrefix(config.StaticPrefix, fs))
 
 	log.Println("Listening on port ", config.Port)
 	err := http.ListenAndServe(config.Port, mux)
 
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }
