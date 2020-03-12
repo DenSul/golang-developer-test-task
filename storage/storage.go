@@ -11,6 +11,7 @@ type Storage interface {
 	FlushAll()
 	GetPatternName() string
 	GetAllowedIndex() []string
+	FindByQuery(query []string) []models.ParkingTaxi
 }
 
 func GetStorage(storage config.Storage) Storage {

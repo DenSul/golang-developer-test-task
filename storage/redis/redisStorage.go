@@ -6,8 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/go-redis/redis/v7"
+	"log"
 	"reflect"
 	"strconv"
+	"time"
 )
 
 const Delimiter = ":"
@@ -75,6 +77,44 @@ func (r Redis) Insert(models []models.ParkingTaxi) {
 	pipeline.Exec()
 
 	r.CreateIndex(IndexData)
+}
+
+func (r Redis) FindByQuery(query []string) []models.ParkingTaxi {
+	var ids []string
+	var keys []string
+	var result []models.ParkingTaxi
+
+	start := time.Now()
+	ids, _ = r.Client.SInter(query...).Result()
+
+	for _, id := range ids {
+		intId, _ := strconv.Atoi(id)
+		keys = append(keys, fmt.Sprintf(r.GetPatternName(), intId))
+	}
+	elapsed := time.Since(start)
+	log.Printf("sinter redis func: %s", elapsed)
+
+	startm := time.Now()
+	data, _ := r.Client.MGet(keys...).Result()
+	elapsedm := time.Since(startm)
+	log.Printf("mget redis func: %s", elapsedm)
+
+	startj := time.Now()
+	for _, parkingData := range data {
+		parkingTaxi := models.ParkingTaxi{}
+
+		b := []byte(parkingData.(string))
+		err := json.Unmarshal(b, &parkingTaxi)
+		if err != nil {
+			panic(err)
+		}
+
+		result = append(result, parkingTaxi)
+	}
+	elapsedj := time.Since(startj)
+	log.Printf("json redis func: %s", elapsedj)
+
+	return result
 }
 
 func (r Redis) CreateIndex(IndexData map[string]map[interface{}][]interface{}) {

@@ -32,6 +32,7 @@ func Home(w http.ResponseWriter, req *http.Request) {
 
 	Rnd.HTML(w, http.StatusOK, "home", message)
 }
+
 func uploadFile(w http.ResponseWriter, req *http.Request) error {
 	req.ParseMultipartForm(0)
 	file, handler, err := req.FormFile(filenameInput)

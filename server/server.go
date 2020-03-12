@@ -2,19 +2,23 @@ package server
 
 import (
 	"app/config"
+	searchEngineService "app/services/searchEngine"
 	"github.com/thedevsaddam/renderer"
 	"log"
 	"net/http"
 )
 
 var rnd *renderer.Render
+var searchEngine *searchEngineService.SearchEngine
 
-func Start(config config.WebServer) {
+func Run(config config.WebServer, engine *searchEngineService.SearchEngine) {
 	opts := renderer.Options{
 		ParseGlobPattern: config.Tpl + config.TplPattern,
 	}
 
 	rnd = renderer.New(opts)
+	searchEngine = engine
+
 	fs := http.FileServer(http.Dir(config.StaticPath))
 	mux := http.NewServeMux()
 
